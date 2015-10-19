@@ -1,0 +1,58 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+ http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+ http://www.springframework.org/schema/context
+ http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<context:component-scan base-package="ar.com.rrhhService.controllers" />
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/jsp/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+
+	</bean>
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/rrhhService" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+	</bean>
+
+
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+
+	<bean id="motoDAO" class="ar.com.rrhhService.dao.MotoDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="empleadoDAO" class="ar.com.rrhhService.dao.EmpleadoDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="horarioDAO" class="ar.com.rrhhService.dao.HorarioDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- <bean id="personaDAO" class="ar.com.sgt.dao.PersonaDAO"> -->
+	<!-- <property name="sessionFactory" ref="sessionFactory" /> -->
+	<!-- </bean> -->
+
+</beans>
