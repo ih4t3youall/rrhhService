@@ -31,6 +31,8 @@ public class Empleado {
 	private String legajo;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
 	private List<Horario> horarios;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
+	private List<Solicitud> solicitudes;
 
 	public int getIdEmpleado() {
 		return idEmpleado;
@@ -86,6 +88,14 @@ public class Empleado {
 
 	public void setHorarios(List<Horario> horarios) {
 		this.horarios = horarios;
+	}
+
+	public List<Solicitud> getSolicitudes() {
+		return solicitudes;
+	}
+
+	public void setSolicitudes(List<Solicitud> solicitudes) {
+		this.solicitudes = solicitudes;
 	}
 	
 	

@@ -8,8 +8,8 @@
     <property name="show_sql">true</property>  
     <property name="hibernate.hbm2ddl.auto">create</property>
     <property name="hibernate.connection.pool_size">10</property>
-    <mapping class="ar.com.rrhhService.dominio.Moto"/>
     <mapping class="ar.com.rrhhService.dominio.Empleado"/>
     <mapping class="ar.com.rrhhService.dominio.Horario"/>   
+    <mapping class="ar.com.rrhhService.dominio.Solicitud"/>   
   </session-factory>
 </hibernate-configuration>

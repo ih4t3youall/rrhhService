@@ -51,8 +51,8 @@
 	<bean id="horarioDAO" class="ar.com.rrhhService.dao.HorarioDAO">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	<!-- <bean id="personaDAO" class="ar.com.sgt.dao.PersonaDAO"> -->
-	<!-- <property name="sessionFactory" ref="sessionFactory" /> -->
-	<!-- </bean> -->
+	<bean id="solicitudDAO" class="ar.com.rrhhService.dao.SolicitudDAO">
+	<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 
 </beans>

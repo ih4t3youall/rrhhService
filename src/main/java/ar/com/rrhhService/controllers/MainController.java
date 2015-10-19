@@ -12,19 +12,21 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.com.rrhhService.dao.EmpleadoDAO;
 import ar.com.rrhhService.dao.HorarioDAO;
 import ar.com.rrhhService.dao.MotoDAO;
+import ar.com.rrhhService.dao.SolicitudDAO;
 import ar.com.rrhhService.dominio.Empleado;
 import ar.com.rrhhService.dominio.Horario;
 import ar.com.rrhhService.dominio.Moto;
+import ar.com.rrhhService.dominio.Solicitud;
 
 @Controller
 public class MainController {
 
 	@Autowired
-	private MotoDAO motoDAO;
-	@Autowired
 	private EmpleadoDAO empleadoDAO;
 	@Autowired
 	private HorarioDAO horarioDAO;
+	@Autowired
+	private SolicitudDAO solicitudDAO;
 	
 	
 	@RequestMapping("traerEmpleado.htm")
@@ -51,6 +53,8 @@ public class MainController {
 		List<Horario> horarios = new ArrayList<Horario>();
 		Horario ho = new Horario();
 
+		
+		
 		// 1) create a java calendar instance
 		Calendar calendar = Calendar.getInstance();
 		 
@@ -67,19 +71,32 @@ public class MainController {
 		ho.setEmpleado(empleado);
 		horarios.add(ho);
 		
+		Solicitud sol = new Solicitud();
+		List<Solicitud> solicitudes = new ArrayList<Solicitud>();
+		sol.setEmpleado(empleado);
+		sol.setFecha_realizado(currentTimestamp);
+		sol.setLicencia_fin(currentTimestamp);
+		sol.setLicencia_inicio(currentTimestamp);
+		
+		solicitudes.add(sol);
+		
 		empleado.setHorarios(horarios);
+		empleado.setSolicitudes(solicitudes);
+		
+		
 		
 		
 		empleadoDAO.save(empleado);		
 		horarioDAO.save(ho);
+		solicitudDAO.save(sol);
 		
 		
 		
 		
-		Moto moto =  new Moto();
-		moto.setMarca("honda");
-		moto.setModelo("cbr600");
-		motoDAO.save(moto);
+//		Moto moto =  new Moto();
+//		moto.setMarca("honda");
+//		moto.setModelo("cbr600");
+//		motoDAO.save(moto);
 		
 		
 		
@@ -89,14 +106,6 @@ public class MainController {
 		
 	}
 
-	public MotoDAO getMotoDAO() {
-		return motoDAO;
-	}
-
-	public void setMotoDAO(MotoDAO motoDAO) {
-		this.motoDAO = motoDAO;
-	}
-	
 	
 	
 }
