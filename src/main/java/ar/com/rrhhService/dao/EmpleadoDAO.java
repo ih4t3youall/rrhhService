@@ -1,5 +1,6 @@
 package ar.com.rrhhService.dao;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -39,6 +40,17 @@ public class EmpleadoDAO {
 	        List<Empleado> personList = session.createQuery("select p  from "+Empleado.class.getName()+" p").list();
 	        session.close();
 	        return personList;
+	    }
+	    
+	    public long crearEmpleado(Object p){
+	    	
+	    	Session session = this.sessionFactory.openSession();
+	    	 Transaction tx = session.beginTransaction();
+		        session.persist(p);
+		        tx.commit();
+	    	Long lastId = ((BigInteger) session.createSQLQuery("SELECT LAST_INSERT_ID()").uniqueResult()).longValue();
+	    	session.close();
+	    	return lastId;
 	    }
 
 		public SessionFactory getSessionFactory() {

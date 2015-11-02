@@ -1,6 +1,5 @@
 package ar.com.rrhhService.dominio;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Column;

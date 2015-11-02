@@ -6,10 +6,14 @@
   <session-factory>
     <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="show_sql">true</property>  
-    <property name="hibernate.hbm2ddl.auto">create</property>
+<!--     <property name="hibernate.hbm2ddl.auto">create</property> -->
+    <property name="hibernate.hbm2ddl.auto">update</property>
     <property name="hibernate.connection.pool_size">10</property>
     <mapping class="ar.com.rrhhService.dominio.Empleado"/>
     <mapping class="ar.com.rrhhService.dominio.Horario"/>   
-    <mapping class="ar.com.rrhhService.dominio.Solicitud"/>   
+    <mapping class="ar.com.rrhhService.dominio.Solicitud"/> 
+    <mapping class="ar.com.rrhhService.dominio.User"/> 
+    <mapping class="ar.com.rrhhService.dominio.UserRole"/>   
+    
   </session-factory>
 </hibernate-configuration>

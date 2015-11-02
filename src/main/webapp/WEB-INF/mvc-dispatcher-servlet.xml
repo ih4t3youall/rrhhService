@@ -29,6 +29,13 @@
 	</bean>
 
 
+	<bean id="dozerMapper" class="org.dozer.DozerBeanMapper">
+		<property name="mappingFiles">
+			<list>
+				<value>dozzerUserUsuarioDTO.xml</value>
+			</list>
+		</property>
+	</bean>
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
@@ -41,6 +48,12 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
+	<bean id="customlAuthenticationSuccessHandler"
+		class="ar.com.rrhhService.handler.CustomlAuthenticationSuccessHandler" />
+
+
+	<bean id="adminController" class="ar.com.rrhhService.controllers.AdminController">
+	</bean>
 
 	<bean id="motoDAO" class="ar.com.rrhhService.dao.MotoDAO">
 		<property name="sessionFactory" ref="sessionFactory" />
@@ -52,7 +65,13 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="solicitudDAO" class="ar.com.rrhhService.dao.SolicitudDAO">
-	<property name="sessionFactory" ref="sessionFactory" />
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="userDAO" class="ar.com.rrhhService.dao.UserDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="userRoleDAO" class="ar.com.rrhhService.dao.UserRoleDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
 </beans>

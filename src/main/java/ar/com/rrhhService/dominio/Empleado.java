@@ -1,103 +1,186 @@
 package ar.com.rrhhService.dominio;
 
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
+/**
+ * The persistent class for the empleado database table.
+ * 
+ */
 @Entity
-@Table(name="empleado")
-public class Empleado {
+@NamedQuery(name="Empleado.findAll", query="SELECT e FROM Empleado e")
+public class Empleado implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_empleado", unique = true, nullable = false)
+	@Column(name="id_empleado")
 	private int idEmpleado;
-	@Column(name="nombre")
-	private String nombre;
-	@Column (name= "apellido")
+
 	private String apellido;
-	@Column(name = "direccion")
+
+	private String cargo;
+
+	private String celular;
+
 	private String direccion;
-	@Column(name = "telefono")
-	private String telefono;
-	@Column(name ="legajo")
+
+	private String documento;
+
+	@Temporal(TemporalType.DATE)
+	private Date fechaNacimiento;
+
 	private String legajo;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
+
+	private String nombre;
+
+	private String subCargo;
+
+	private String telefono;
+
+	//bi-directional many-to-one association to Horario
+	@OneToMany(mappedBy="empleado")
 	private List<Horario> horarios;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
-	private List<Solicitud> solicitudes;
+
+	//bi-directional many-to-one association to Solicitud
+	@OneToMany(mappedBy="empleado")
+	private List<Solicitud> solicituds;
+
+	public Empleado() {
+	}
 
 	public int getIdEmpleado() {
-		return idEmpleado;
+		return this.idEmpleado;
 	}
 
 	public void setIdEmpleado(int idEmpleado) {
 		this.idEmpleado = idEmpleado;
 	}
 
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
 	public String getApellido() {
-		return apellido;
+		return this.apellido;
 	}
 
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
 
+	public String getCargo() {
+		return this.cargo;
+	}
+
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
+	}
+
+	public String getCelular() {
+		return this.celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
 	public String getDireccion() {
-		return direccion;
+		return this.direccion;
 	}
 
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
 
-	public String getTelefono() {
-		return telefono;
+	public String getDocumento() {
+		return this.documento;
 	}
 
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
+	public void setDocumento(String documento) {
+		this.documento = documento;
+	}
+
+	public Date getFechaNacimiento() {
+		return this.fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
 	}
 
 	public String getLegajo() {
-		return legajo;
+		return this.legajo;
 	}
 
 	public void setLegajo(String legajo) {
 		this.legajo = legajo;
 	}
 
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getSubCargo() {
+		return this.subCargo;
+	}
+
+	public void setSubCargo(String subCargo) {
+		this.subCargo = subCargo;
+	}
+
+	public String getTelefono() {
+		return this.telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
 	public List<Horario> getHorarios() {
-		return horarios;
+		return this.horarios;
 	}
 
 	public void setHorarios(List<Horario> horarios) {
 		this.horarios = horarios;
 	}
 
-	public List<Solicitud> getSolicitudes() {
-		return solicitudes;
+	public Horario addHorario(Horario horario) {
+		getHorarios().add(horario);
+		horario.setEmpleado(this);
+
+		return horario;
 	}
 
-	public void setSolicitudes(List<Solicitud> solicitudes) {
-		this.solicitudes = solicitudes;
+	public Horario removeHorario(Horario horario) {
+		getHorarios().remove(horario);
+		horario.setEmpleado(null);
+
+		return horario;
 	}
-	
-	
+
+	public List<Solicitud> getSolicituds() {
+		return this.solicituds;
+	}
+
+	public void setSolicituds(List<Solicitud> solicituds) {
+		this.solicituds = solicituds;
+	}
+
+	public Solicitud addSolicitud(Solicitud solicitud) {
+		getSolicituds().add(solicitud);
+		solicitud.setEmpleado(this);
+
+		return solicitud;
+	}
+
+	public Solicitud removeSolicitud(Solicitud solicitud) {
+		getSolicituds().remove(solicitud);
+		solicitud.setEmpleado(null);
+
+		return solicitud;
+	}
 
 }
