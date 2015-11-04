@@ -25,7 +25,7 @@ public class User implements Serializable {
 	private String password;
 
 	// bi-directional many-to-one association to UserRole
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user",cascade=CascadeType.PERSIST)
 	private List<UserRole> userRoles;
 
 	public User() {

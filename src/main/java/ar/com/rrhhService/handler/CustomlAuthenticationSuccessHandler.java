@@ -60,7 +60,7 @@ public class CustomlAuthenticationSuccessHandler  implements AuthenticationSucce
 		        	
 		        } else if(isEmpleado){
 					try {
-						response.sendRedirect("adm_inicio.htm");
+						response.sendRedirect("empEmpleadoInicio.htm");
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

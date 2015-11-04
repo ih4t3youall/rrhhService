@@ -42,13 +42,13 @@ public class EmpleadoDAO {
 	        return personList;
 	    }
 	    
-	    public long crearEmpleado(Object p){
+	    public int crearEmpleado(Object p){
 	    	
 	    	Session session = this.sessionFactory.openSession();
 	    	 Transaction tx = session.beginTransaction();
 		        session.persist(p);
 		        tx.commit();
-	    	Long lastId = ((BigInteger) session.createSQLQuery("SELECT LAST_INSERT_ID()").uniqueResult()).longValue();
+	    	int lastId = ((BigInteger) session.createSQLQuery("SELECT LAST_INSERT_ID()").uniqueResult()).intValue();
 	    	session.close();
 	    	return lastId;
 	    }

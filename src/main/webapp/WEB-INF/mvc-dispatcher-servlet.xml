@@ -33,6 +33,7 @@
 		<property name="mappingFiles">
 			<list>
 				<value>dozzerUserUsuarioDTO.xml</value>
+				<value>dozzerUserEmpleado.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -60,6 +61,13 @@
 	</bean>
 	<bean id="empleadoDAO" class="ar.com.rrhhService.dao.EmpleadoDAO">
 		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="usuarioBO" class="ar.com.rrhhService.bo.UsuarioBO">
+		<property name="empleadoDAO" ref="empleadoDAO" />
+		<property name="userDAO" ref="userDAO" />
+		<property name="dozerMapper" ref="dozerMapper" />
+		<property name="userRoleDAO" ref="userRoleDAO" />
+		
 	</bean>
 	<bean id="horarioDAO" class="ar.com.rrhhService.dao.HorarioDAO">
 		<property name="sessionFactory" ref="sessionFactory" />

@@ -15,16 +15,19 @@
 </head>
 <body>
 
-<header role="banner" id="top" class="navbar navbar-static-top bs-docs-nav">
-  <div class="container">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="../">rrhhService - Panel Administrador</a>
-    </div>
-  </div>
-</header>
+<jsp:include page="../commons/headerAdmin.jsp" />	
+<div class="row">
+ <div class="col-md-2">
+<ul class="nav nav-pills nav-stacked">
+  
+  <li role="presentation"><a  href="admFormCrearEmpleado.htm" >Crear usuario</a></li>
+    <li role="presentation"><a href="j_spring_security_logout" >Logout</a></li>
+</ul>
+</div>
+<div class="col-md-5"></div>
+<div class="col-md-5"></div>
+</div>
 
-
-<a class="btn btn-default" href="admFormCrearEmpleado.htm" role="button">Crear usuario</a>
 
 </body>
 </html>

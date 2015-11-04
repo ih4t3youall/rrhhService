@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+          
+  <mapping> 
+    <class-a>ar.com.rrhhService.dominio.Empleado</class-a>
+    <class-b>ar.com.rrhhService.dto.CrearUsuarioDTO</class-b>   
+    <field>
+      <a>nombre</a>
+      <b>username</b>
+    </field>
+    <field>
+      <a>apellido</a>
+      <b>apellido</b>
+    </field>
+    <field>
+      <a>cargo</a>
+      <b>cargo</b>
+    </field>
+    <field>
+      <a>subCargo</a>
+      <b>subCargo</b>
+    </field>
+    <field>
+      <a>celular</a>
+      <b>celular</b>
+    </field>
+    <field>
+      <a>direccion</a>
+      <b>direccion</b>
+    </field>
+    <field>
+      <a>documento</a>
+      <b>documento</b>
+    </field>
+    <field>
+      <a>fechaNacimiento</a>
+      <b>fechaNacimiento</b>
+    </field>
+    <field>
+      <a>legajo</a>
+      <b>legajo</b>
+    </field>
+    <field>
+      <a>telefono</a>
+      <b>telefono</b>
+    </field>
+    <field>
+      <a>celular</a>
+      <b>celular</b>
+    </field>
+    
+
+    
+    
+  </mapping>  
+
+  
+
+</mappings> 

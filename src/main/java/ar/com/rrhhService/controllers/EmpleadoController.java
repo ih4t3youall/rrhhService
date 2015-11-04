@@ -6,10 +6,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class EmpleadoController {
-	@RequestMapping("empleadoInicio.htm")
+	@RequestMapping("empEmpleadoInicio.htm")
 	public ModelAndView inicioEmpleado(){
 		
-		ModelAndView mav = new ModelAndView("empleado/inicioEmpleado");
+		ModelAndView mav = new ModelAndView("empleado/empleadoInicio");
 		
 		
 		return mav;
