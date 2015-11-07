@@ -1,3 +1,5 @@
+drop schema rrhhservice;
+create schema rrhhservice;
 use rrhhservice;
 -- MySQL Workbench Forward Engineering
 
@@ -6,8 +8,13 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema rrhhservice
 -- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema rrhhservice
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `rrhhservice` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
 -- -----------------------------------------------------
 -- Schema rrhhservice
 -- -----------------------------------------------------
@@ -16,6 +23,17 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- Schema rrhhservice
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `rrhhservice` DEFAULT CHARACTER SET utf8 ;
+USE `rrhhservice` ;
+
+-- -----------------------------------------------------
+-- Table `rrhhservice`.`motivo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `rrhhservice`.`motivo` (
+  `idmotivo` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
+  `motivo` VARCHAR(100) NULL COMMENT '',
+  PRIMARY KEY (`idmotivo`)  COMMENT '')
+ENGINE = InnoDB;
+
 USE `rrhhservice` ;
 
 -- -----------------------------------------------------
@@ -36,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `rrhhservice`.`empleado` (
   PRIMARY KEY (`id_empleado`)  COMMENT '',
   UNIQUE INDEX `id_empleado` (`id_empleado` ASC)  COMMENT '')
 ENGINE = InnoDB
-AUTO_INCREMENT = 7
+AUTO_INCREMENT = 51
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -55,7 +73,6 @@ CREATE TABLE IF NOT EXISTS `rrhhservice`.`horario` (
     FOREIGN KEY (`id_empleado`)
     REFERENCES `rrhhservice`.`empleado` (`id_empleado`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 7
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -67,17 +84,22 @@ CREATE TABLE IF NOT EXISTS `rrhhservice`.`solicitud` (
   `fecha_realizado` DATE NULL DEFAULT NULL COMMENT '',
   `licencia_fin` DATE NULL DEFAULT NULL COMMENT '',
   `licencia_inicio` DATE NULL DEFAULT NULL COMMENT '',
-  `motivo` VARCHAR(255) NULL DEFAULT NULL COMMENT '',
-  `solicitud` VARCHAR(255) NULL DEFAULT NULL COMMENT '',
+  `textoSolicitud` VARCHAR(255) NULL DEFAULT NULL COMMENT '',
   `id_empleado` INT(11) NOT NULL COMMENT '',
+  `motivo_idmotivo` INT UNSIGNED NOT NULL COMMENT '',
   PRIMARY KEY (`id_solicitud`)  COMMENT '',
   UNIQUE INDEX `id_solicitud` (`id_solicitud` ASC)  COMMENT '',
   INDEX `FKAF52BEA4D49CD4BE` (`id_empleado` ASC)  COMMENT '',
+  INDEX `fk_solicitud_motivo1_idx` (`motivo_idmotivo` ASC)  COMMENT '',
   CONSTRAINT `FKAF52BEA4D49CD4BE`
     FOREIGN KEY (`id_empleado`)
-    REFERENCES `rrhhservice`.`empleado` (`id_empleado`))
+    REFERENCES `rrhhservice`.`empleado` (`id_empleado`),
+  CONSTRAINT `fk_solicitud_motivo1`
+    FOREIGN KEY (`motivo_idmotivo`)
+    REFERENCES `rrhhservice`.`motivo` (`idmotivo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 7
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -88,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `rrhhservice`.`users` (
   `username` VARCHAR(45) NOT NULL COMMENT '',
   `password` VARCHAR(45) NOT NULL COMMENT '',
   `enabled` TINYINT(4) NOT NULL DEFAULT '1' COMMENT '',
-  `id_empleado` INT(11) NULL COMMENT '',
+  `id_empleado` INT(11) NULL DEFAULT NULL COMMENT '',
   PRIMARY KEY (`username`)  COMMENT '')
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -108,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `rrhhservice`.`user_roles` (
     FOREIGN KEY (`username`)
     REFERENCES `rrhhservice`.`users` (`username`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 24
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -117,8 +139,13 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
+
 INSERT INTO users(username,password,enabled)
 VALUES ('root','root', true);
 
 INSERT INTO user_roles (username, role)
 VALUES ('root', 'ROLE_ADMIN');
+
+insert into motivo (motivo) value("tramite");
+insert into motivo (motivo) value("maternidad");
+insert into motivo (motivo) value("otro");

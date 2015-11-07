@@ -2,6 +2,7 @@ package ar.com.rrhhService.dominio;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,10 +36,11 @@ public class Solicitud {
 	@Column(name = "licencia_fin")
 	@Temporal(TemporalType.DATE)
 	private Date licencia_fin;
-	@Column(name = "motivo")
-	private String motivo;
-	@Column(name="solicitud")
-	private String solicitud;
+	@Column(name = "textoSolicitud")
+	private String textoSolicitud;
+	
+	@OneToOne(fetch = FetchType.EAGER, mappedBy = "solicitud", cascade = CascadeType.ALL)
+	private Motivo motivo;
 
 	public int getId_solicitud() {
 		return id_solicitud;
@@ -79,20 +82,13 @@ public class Solicitud {
 		this.licencia_fin = licencia_fin;
 	}
 
-	public String getMotivo() {
-		return motivo;
+	public String getTextoSolicitud() {
+		return textoSolicitud;
 	}
 
-	public void setMotivo(String motivo) {
-		this.motivo = motivo;
+	public void setTextoSolicitud(String textoSolicitud) {
+		this.textoSolicitud = textoSolicitud;
 	}
 
-	public String getSolicitud() {
-		return solicitud;
-	}
-
-	public void setSolicitud(String solicitud) {
-		this.solicitud = solicitud;
-	}
 
 }

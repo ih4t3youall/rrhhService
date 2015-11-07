@@ -7,6 +7,18 @@ public class SolicitarPermisoDTO {
 	private Date fechaDesde;
 	private Date fechaHasta;
 	private String motivo;
+	private String textoSolicitud;
+
+	
+	
+
+	public String getTextoSolicitud() {
+		return textoSolicitud;
+	}
+
+	public void setTextoSolicitud(String textoSolicitud) {
+		this.textoSolicitud = textoSolicitud;
+	}
 
 	public Date getFechaDesde() {
 		return fechaDesde;

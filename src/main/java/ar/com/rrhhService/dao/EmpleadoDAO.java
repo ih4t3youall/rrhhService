@@ -44,12 +44,7 @@ public class EmpleadoDAO {
 		 
 	 }
 	 
-	 public void solictarPermiso(int empleadoIdEmpleado, SolicitarPermisoDTO solicitarPermisoDTO) {
-			
-			
-		 
-		 
-		}
+	
 	 
 	    @SuppressWarnings("unchecked")
 	    

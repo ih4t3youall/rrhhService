@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import ar.com.rrhhService.dao.EmpleadoDAO;
 import ar.com.rrhhService.dao.UserDAO;
+import ar.com.rrhhService.dominio.Empleado;
 import ar.com.rrhhService.dominio.Solicitud;
 import ar.com.rrhhService.dominio.User;
 import ar.com.rrhhService.dto.SolicitarPermisoDTO;
@@ -20,9 +21,11 @@ public class PermisosBO {
 	public void solicitarPermiso(SolicitarPermisoDTO solicitarPermisoDTO, String username) {
 
 		User user = userDAO.getUserByUsername(username);
-		empleadoDAO.solictarPermiso(user.getEmpleadoIdEmpleado(),solicitarPermisoDTO);
+		Solicitud solicitud = dozerMapper.map(solicitarPermisoDTO, Solicitud.class);
+		Empleado empleado = empleadoDAO.getEmpleado(user.getEmpleadoIdEmpleado());
+		solicitud.setEmpleado(empleado);
+		empleadoDAO.save(solicitud);
 
-		 dozerMapper.map(solicitarPermisoDTO, Solicitud.class);
 		
 	}
 

@@ -64,16 +64,19 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="permisosBO" class="ar.com.rrhhService.bo.PermisosBO">
-		<property name="userDAO" ref="userDAO"/>
+		<property name="userDAO" ref="userDAO" />
 	</bean>
 	<bean id="usuarioBO" class="ar.com.rrhhService.bo.UsuarioBO">
 		<property name="empleadoDAO" ref="empleadoDAO" />
 		<property name="userDAO" ref="userDAO" />
 		<property name="dozerMapper" ref="dozerMapper" />
 		<property name="userRoleDAO" ref="userRoleDAO" />
-		
+
 	</bean>
 	<bean id="horarioDAO" class="ar.com.rrhhService.dao.HorarioDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="motivoDAO" class="ar.com.rrhhService.dao.MotivoDAO">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="solicitudDAO" class="ar.com.rrhhService.dao.SolicitudDAO">
@@ -82,7 +85,7 @@
 	<bean id="userDAO" class="ar.com.rrhhService.dao.UserDAO">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	
+
 	<bean id="userRoleDAO" class="ar.com.rrhhService.dao.UserRoleDAO">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
