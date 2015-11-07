@@ -2,12 +2,13 @@ package ar.com.rrhhService.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import ar.com.rrhhService.dominio.Moto;
 import ar.com.rrhhService.dominio.User;
 
 public class UserDAO {
@@ -26,12 +27,23 @@ public class UserDAO {
 	 
 	    @SuppressWarnings("unchecked")
 	    
-	    public List<Moto> list() {
+	    public List<User> list() {
 	        Session session = this.sessionFactory.openSession();
-	        List<Moto> personList = session.createQuery("select p  from "+User.class.getName()+" p").list();
+	        List<User> personList = session.createQuery("select p  from "+User.class.getName()+" p").list();
 	        session.close();
 	        return personList;
 	    }
+	    
+	    public User getUserByUsername(String username){
+	    	
+	    	Criteria criteria = sessionFactory.openSession().createCriteria(User.class);
+	    	criteria.add(Restrictions.eq("username", username));
+	    	Object uniqueResult = criteria.uniqueResult();
+	    	User user  = (User) uniqueResult;
+	    	return user;
+	    	
+	    }
+	    
 
 		public SessionFactory getSessionFactory() {
 			return sessionFactory;

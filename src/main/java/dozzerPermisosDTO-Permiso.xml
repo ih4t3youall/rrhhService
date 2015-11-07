@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+          
+ <configuration>
+    <custom-converters> <!-- these are always bi-directional -->
+      <converter type="ar.com.rrhhService.customConverters.ConverterPermisosDTO" >
+        <class-a>ar.com.rrhhService.dto.SolicitarPermisoDTO</class-a>
+        <class-b>ar.com.rrhhService.dominio.Solicitud</class-b>
+      </converter>
+
+      <!-- You are responsible for mapping everything between 
+           ClassA and ClassB -->
+     
+    </custom-converters>     
+  </configuration>
+
+  
+
+</mappings> 

@@ -8,7 +8,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import ar.com.rrhhService.bo.PermisosBO;
 import ar.com.rrhhService.dominio.Empleado;
+import ar.com.rrhhService.dto.SolicitarPermisoDTO;
 
 public class EmpleadoDAO {
 
@@ -24,6 +26,16 @@ public class EmpleadoDAO {
 	        session.close();
 	    }
 	 
+	 
+		
+	 public void delete(Object p) {
+	        Session session = this.sessionFactory.openSession();
+	        Transaction tx = session.beginTransaction();
+	        session.delete(p);
+	        tx.commit();
+	        session.close();
+	    }
+	 
 	 public Empleado getEmpleado(int idEmpleado){
 		 Session session = this.sessionFactory.openSession();
 		 Empleado empleado = (Empleado) session.get(Empleado.class, idEmpleado);
@@ -31,6 +43,13 @@ public class EmpleadoDAO {
 		 return empleado;
 		 
 	 }
+	 
+	 public void solictarPermiso(int empleadoIdEmpleado, SolicitarPermisoDTO solicitarPermisoDTO) {
+			
+			
+		 
+		 
+		}
 	 
 	    @SuppressWarnings("unchecked")
 	    
@@ -60,5 +79,9 @@ public class EmpleadoDAO {
 		public void setSessionFactory(SessionFactory sessionFactory) {
 			this.sessionFactory = sessionFactory;
 		}
+
+
+
+		
 	    
 }

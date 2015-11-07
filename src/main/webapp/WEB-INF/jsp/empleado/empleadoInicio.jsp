@@ -23,7 +23,7 @@ function getSolicitarPermisos(){
 		url : "empFormSolicitarPermisos.htm",
 		datatype : "text/jason",
 		success : function(response) {
-			
+			$('#contenedor').empty();
 			$('#contenedor').append(response);
 						
 		},

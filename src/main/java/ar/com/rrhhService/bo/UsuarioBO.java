@@ -12,6 +12,7 @@ import ar.com.rrhhService.dominio.Empleado;
 import ar.com.rrhhService.dominio.User;
 import ar.com.rrhhService.dominio.UserRole;
 import ar.com.rrhhService.dto.CrearUsuarioDTO;
+import ar.com.rrhhService.exception.ExisteUsuarioException;
 
 public class UsuarioBO {
 	private EmpleadoDAO empleadoDAO;
@@ -22,7 +23,7 @@ public class UsuarioBO {
 
 	private UserRoleDAO userRoleDAO;
 
-	public void crearUsuarioEmpleado(CrearUsuarioDTO usuarioDTO) {
+	public void crearUsuarioEmpleado(CrearUsuarioDTO usuarioDTO) throws ExisteUsuarioException {
 		User user = dozerMapper.map(usuarioDTO, User.class);
 		Empleado emp = dozerMapper.map(usuarioDTO, Empleado.class);
 		user.setEnabled(true);
@@ -34,10 +35,14 @@ public class UsuarioBO {
 		user.setUserRoles(listUserRole);
 
 		int idEmpleado = empleadoDAO.crearEmpleado(emp);
-
+		emp.setIdEmpleado(idEmpleado);
 		user.setEmpleadoIdEmpleado(idEmpleado);
+		try{
 		userDAO.save(user);
-		userDAO.save(emp);
+		}catch(Exception e){
+			empleadoDAO.delete(emp);
+			throw new ExisteUsuarioException();
+		}
 	}
 
 	public EmpleadoDAO getEmpleadoDAO() {

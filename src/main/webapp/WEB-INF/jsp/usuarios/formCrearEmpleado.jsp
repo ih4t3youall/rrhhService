@@ -16,20 +16,39 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="resources/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+
+<!-- 	datepicker -->
+<link rel="stylesheet"
+	href="resources/bootstrap-3.3.5-dist/plugins/datepicker/datepicker.css">
+	<script src="resources/bootstrap-3.3.5-dist/plugins/datepicker/bootstrap-datepicker.js"></script>
+<!-- fin datepicker -->
+
 </head>
+
+<script type="text/javascript">
+
+$( document ).ready(function() {
+   
+	
+	$('#fechaNacimiento').datepicker();
+});
+
+
+</script>
 <body>
 
 	<jsp:include page="../commons/headerAdmin.jsp" />
 	<c:if test="${not empty exito}">
 		<p>Usuario creado con exito</p>
 	</c:if>
+		<c:if test="${not empty fracaso}">
+		<p>El nombre de usuario ya existe, por favor pruebe otro.</p>
+	</c:if>
 
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
 
-			<form:form method="post" name="farm" id="crearUsuario"
-				action="admCrearEmpleado.htm" modelAttribute="usuarioDTO">
-				<div class="input-control text full-size">
+			<form:form method="post" name="farm" id="crearUsuario"	action="admCrearEmpleado.htm" modelAttribute="usuarioDTO">
 
 					<div class="form-group">
 						<label for="exampleInputEmail1">Nombre Usuario</label>
@@ -38,7 +57,6 @@
 										<div class="form-group">
 						<label for="exampleInputEmail1">Password</label>
 						<form:input type="password" path="password" id="password"  class="form-control" placeholder="Password" /> 
-					</div>
 					</div>
 										<div class="form-group">
 						<label for="exampleInputEmail1">legajo</label>
@@ -53,10 +71,10 @@
 						<label for="exampleInputEmail1">Sub Cargo</label>
 						<form:input type="text" path="subCargo" id="subCargo"  class="form-control" placeholder="subCargo" /> 
 					</div>
-<!-- 						<div class="form-group"> -->
-<!-- 						<label for="exampleInputEmail1">Fecha nacimiento</label> -->
-<%-- 						<form:input type="text" path="fechaNacimiento" id="fechaNacimiento"  class="form-control" placeholder="fechaNacimiento" />  --%>
-<!-- 					</div> -->
+						<div class="form-group">
+						<label for="exampleInputEmail1">Fecha nacimiento</label>
+						<form:input type="date" path="fechaNacimiento" id="fechaNacimiento"  class="form-control" placeholder="fechaNacimiento" /> 
+					</div>
 						<div class="form-group">
 						<label for="exampleInputEmail1">Direccion</label>
 						<form:input type="text" path="direccion" id="direccion"  class="form-control" placeholder="direccion" /> 
@@ -70,8 +88,8 @@
 						<form:input type="text" path="celular" id="celular"  class="form-control" placeholder="celular" /> 
 					</div>
 					<button class="btn btn-default" onclick="$('#crearUsuario').submit();" type="submit">Crear Empleado</button>
-				</div>
 			</form:form>
+				</div>
 </div>
 
 			<%-- 			<form:form method="post" name="farm" id="crearUsuario" --%>

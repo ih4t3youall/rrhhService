@@ -34,6 +34,7 @@
 			<list>
 				<value>dozzerUserUsuarioDTO.xml</value>
 				<value>dozzerUserEmpleado.xml</value>
+				<value>dozzerPermisosDTO-Permiso.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -62,6 +63,9 @@
 	<bean id="empleadoDAO" class="ar.com.rrhhService.dao.EmpleadoDAO">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	<bean id="permisosBO" class="ar.com.rrhhService.bo.PermisosBO">
+		<property name="userDAO" ref="userDAO"/>
+	</bean>
 	<bean id="usuarioBO" class="ar.com.rrhhService.bo.UsuarioBO">
 		<property name="empleadoDAO" ref="empleadoDAO" />
 		<property name="userDAO" ref="userDAO" />
@@ -78,6 +82,7 @@
 	<bean id="userDAO" class="ar.com.rrhhService.dao.UserDAO">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	
 	<bean id="userRoleDAO" class="ar.com.rrhhService.dao.UserRoleDAO">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>

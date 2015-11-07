@@ -7,6 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.com.rrhhService.bo.UsuarioBO;
 import ar.com.rrhhService.dto.CrearUsuarioDTO;
+import ar.com.rrhhService.exception.ExisteUsuarioException;
 
 @Controller
 public class UsuariosController {
@@ -26,13 +27,17 @@ public class UsuariosController {
 	}
 	
 	@RequestMapping("admCrearEmpleado.htm")
-	public ModelAndView crearUsuario(CrearUsuarioDTO usuarioDTO){
+	public ModelAndView crearUsuario(CrearUsuarioDTO usuarioDTO) {
 		
-
-		usuarioBO.crearUsuarioEmpleado(usuarioDTO);
-		
-
 		ModelAndView mav = formCrearUsuario();
+		try {
+			usuarioBO.crearUsuarioEmpleado(usuarioDTO);
+		} catch (ExisteUsuarioException e) {
+			// TODO Auto-generated catch block
+			mav.addObject("fracaso","fracaso");
+			return mav;
+		}
+		 
 		mav.addObject("exito","exito");
 		return mav;
 		
